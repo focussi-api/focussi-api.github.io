@@ -12,7 +12,7 @@ Description
 : This API allows you to add a driver to CBA. You can optionally add coverage for the driver in the same request.
 
 Url
-:  `/api/v2/dof/{fleet_token}/add_driver`
+:  `/api/v2/driver_only_fleet/add_driver`
 
 Method
 : POST
@@ -20,18 +20,19 @@ Method
 ## Body
 ```json
 {
+    "fleet_token": "",
     "identifiers": 
     {
-       "driver_number": "XXX1",
-       "custom_idenfier_1": "XXX2",
-       "custom_identifier_2": "XXX3"
+       "driver_number": "<driver_number>",
+       "custom_idenfier_1": "<custom_idenfier_1>",
+       "custom_identifier_2": "<custom_idenfier_2>"
     },
     "driver":
     {
         "first_name": "",
         "middle_name": "",
         "last_name": "",
-        "dob": "0001-01-01",
+        "dob": "<dob:Date>",
         "email": "",
         "phone_number" :"",
         "cell_number": "",
@@ -51,13 +52,13 @@ Method
     "coverages":
     [
         {
-            "inception_date": "2021-01-01",
-            "termination_date": "0001-01-01",
-            "product_token": "",
+            "inception_date": "<inception_date:Date>",
+            "termination_date": "<termination_date:Date>",
+            "product_token": "<product_token>",
             "options": 
             {
-                "option_1": "",
-                "option_2": ""
+                "option_1": "<option_1>",
+                "option_2": "<option_2>"
             } 
         }
     ]
@@ -65,11 +66,12 @@ Method
 ```
 
 ## Parameters
-1. `identifiers` is a required element. At least one key should be supplied. Any key with blank value will be ignored. The request would be rejected if `identifiers` is not valid. `driver_name` is a preserved built-in key. You could define any custom key and not use the preserved one. 
+- `fleet_token` Required. This if offered by IT department of Focus Solutions.
+- `identifiers` Required. At least one key should be supplied. Any key with blank value will be ignored. The request would be rejected if `identifiers` is not valid. `driver_name` is a preserved built-in key. You could define any custom key and not use the preserved one. 
 
-2. `driver` is a required element. You can have custom fields passed as well using the optional nested element `custom_fields`.
+- `driver` Required. You can have custom fields passed as well using the optional nested element `custom_fields`.
 
-3. `coverages` is an optional element and is type of `Array`, but remember product_token should be unique for each item in the coverage list.
+- `coverages` Required. `Array` type. Remember product_token should be unique for each coverage item in the list.
 
 ## Response
 ```json
