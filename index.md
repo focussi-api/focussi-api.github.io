@@ -24,9 +24,12 @@ A product, which is identified by a *product token*, wraps all the policy detail
 
 ### Insured
 There are three categories for insurable objects.
-* Contractor.
-* Unit.
-* Driver.
+
+| Category | Description|
+|:---  |:--- |
+| Contractor | representing a business. | 
+| Unit | representing a vehicle. |
+| Driver | representing a person. |
 
 ### Coverage
 A coverage could be added for any of the three different types of insured. 

@@ -17,7 +17,6 @@ Url
 Method
 : POST
 
-
 ## Body
 ```json
 {
@@ -64,6 +63,7 @@ Method
     ]
 }
 ```
+
 ## Parameters
 1. `identifiers` is a required element. At least one key should be supplied. Any key with blank value will be ignored. The request would be rejected if `identifiers` is not valid. `driver_name` is a preserved built-in key. You could define any custom key and not use the preserved one. 
 
@@ -74,9 +74,9 @@ Method
 ## Response
 ```json
 {
-    "success": "false",
-    "error_code": "",
-    "error_message": ""
+    "success": true|false,
+    "error_code": "<error_code>",
+    "error_message": "<error_message>"
 }
 ```
 1. The request would either succeed or fail as a whole. it will not be partially proccessed. 
