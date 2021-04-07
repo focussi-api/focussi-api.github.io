@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About us"
-permalink: /about-us
+permalink: /about-us/
 ---
 Insurance is necessary to protect your interests but can be difficult to manage. We understand the complexities of managing insurance. We reduce the insurance management burden so that you can maximize earnings and get back to running your business.
 
