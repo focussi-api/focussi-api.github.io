@@ -1,10 +1,11 @@
 ---
 parent: Driver Only Fleet
-title: Add Driver
-nav_order: 1
+title: Update Driver
+has_children: false
+nav_order: 2
 ---
 
-# Add Driver
+# Update Driver
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,13 +18,13 @@ nav_order: 1
 </details>
 
 ## Description 
-This API allows you to add a driver to CBA. Optionally you can add coverage for the driver in the same request.
+This API allows you to update an existing driver in CBA. Coverages will not be changed.
 
 
 ## Url 
 
 ```
-https://{site}.focussi.com/api/v2/dof/add_driver
+https://{site}.focussi.com/api/v2/dof/update_driver
 ```
  
 
@@ -65,30 +66,14 @@ POST
             "custom_field_1": "<custom_field_1>",
             "custom_field_2": "<custom_field_2>"
         }
-    },
-    "coverages":
-    [
-        {
-            "inception_date": "<inception_date:Date>",
-            "termination_date": "<termination_date:Date>",
-            "product_token": "<product_token>",
-            "options": 
-            {
-                "option_1": "<option_1>",
-                "option_2": "<option_2>"
-            } 
-        }
-    ]
+    }
 }
 ```
 
 ## Parameters
 - `fleet_token` Required. This if offered by IT department of Focus Solutions.
-- `identifiers` Required. At least one key should be supplied. Any key with blank value will be ignored. The request would be rejected if `identifiers` is not valid. `driver_number` is a preserved built-in key. You could define any custom key and not use the preserved one. 
-
-- `driver` Required. You can have custom fields passed as well using the optional nested element `custom_fields`.
-
-- `coverages` Required. `Array` type. Remember product_token should be unique for each coverage item in the list.
+- `identifiers` Required. At least one key should be supplied. The identifiers will be used to match the drivers in CBA under the fleet. If no driver or more than one drivers get matched, the request would fail.
+- `driver` Required. The driver will be updated with the provided information.
 
 ## Response
 ```json
@@ -104,7 +89,11 @@ POST
 
     | Code | Description|
     |:---  |:--- |
-    | InvalidInput | There could be several causes for this kind of failure. Eg: the json input cannot be parsed; identifiers not supplied; etc. | 
-    | DriverExists | The request driver already exists in CBA. |
+    | NoDriver | The request driver does not exist in CBA. |
+    | MultipleDriversFound | More than one drivers are matched by given identifiers. |
     
 ## Q&A
+- **Q**: If a driver field has a blank value, will it the field remain changed or be cleared in CBA?
+
+    **A**: It will be cleared. Don't include the filed in the request if you would not like to change it.
+
